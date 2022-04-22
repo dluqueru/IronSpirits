@@ -1,3 +1,33 @@
     <h1>Welcome</h1>
     
     <p>IronSpirits provides best value</p>
+
+    <section>
+        
+        <form class="form-container" action="/products" method="get">
+            <p>Search products:</p>
+
+            <label>
+                Maximum price:
+                <input type="number" min= "1" name="maxPrice">
+            </label>
+            <button type="submit">Submit</button>
+            
+        </form>
+    </section>
+
+    <section>
+        
+        <form class="form-container" action="/new" method="post">
+            <p>Create new product:</p>
+
+            <label>
+                Product name:
+                <input type="text" name="title">
+                Product price:
+                <input type="number" min="1" name="price">
+            </label>
+            <button type="submit">Submit</button>
+            
+        </form>
+    </section>

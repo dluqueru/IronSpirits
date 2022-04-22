@@ -2,6 +2,8 @@ const express = require('express');
 const res = require('express/lib/response');
 const Product = require('./models/Product.model');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+    
 
 // We create our own server named app
 // Express server will be handling requests and responses
@@ -11,6 +13,7 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "hbs");
 
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose
   .connect('mongodb://localhost/ironborn-ecommerce')
@@ -36,7 +39,16 @@ app.get("/contact", (req, res, next) => {
 
 app.get("/products", (req, res, next) => {
 
-    Product.find()
+    let filter;
+    const max = req.query.maxPrice;
+    
+    if(max === undefined) {
+        filter = {};
+    } else {
+        filter = {price: {$lte: max}}
+    }
+
+    Product.find(filter)
         .then((productsArr) => {
             res.render('productList', {products: productsArr});
         })
@@ -87,6 +99,19 @@ app.get("/products/:productId", (req, res, next) => {
         })
         .catch(error => console.log('error quetting product from DB', error));
     
+})
+
+app.post("/new", (req, res, next) => {
+
+    const newProduct = {
+        title: req.body.title,
+        price: req.body.price
+    };
+    Product.create(newProduct)
+        .then( newProduct => {
+            res.redirect("/products");
+        })
+        .catch(error => console.log('error creating new product', error));
 })
 
 
