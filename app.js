@@ -1,5 +1,7 @@
 const express = require('express');
 const res = require('express/lib/response');
+const Product = require('./models/Product.model');
+const mongoose = require('mongoose');
 
 // We create our own server named app
 // Express server will be handling requests and responses
@@ -10,48 +12,62 @@ app.set("view engine", "hbs");
 
 app.use(express.static('public'));
 
+mongoose
+  .connect('mongodb://localhost/ironborn-ecommerce')
+  .then(x => console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`))
+  .catch(err => console.error('Error connecting to mongo', err));
+
 // app.get(path, code);
 
 app.get("/", (req, res, next) => {
-    res.sendFile(__dirname + '/views/home.html');
+    res.render('home');
 })
 
 app.get("/about", (req, res, next) => { //request , resolve
     // console.log(req.url);
     // console.log("a request on the ABOUT page was received");
-    res.sendFile(__dirname + '/views/about.html');
+    // res.sendFile(__dirname + '/views/about.html');
+    res.render('about');
 });
 
 app.get("/contact", (req, res, next) => {
-    res.sendFile(__dirname + '/views/contact.html');
+    res.render('contact');
 });
 
 app.get("/limoncello", (req, res, next) => {
-    const data = {
-        title: "Limoncello",
-        price: 20,
-        imageFile: "limoncello-weno.jpg",
-        stores: ["Online","Albacete", "Freiburg", "Amsterdam"]
-    }
-    res.render("product", data);
+
+    Product.findOne({title: 'Limoncello'})
+        .then((productDetails) => {
+            res.render("product", productDetails);
+        })
+        .catch(error => console.log('error quetting product from DB', error));
 })
 
 app.get("/single-malt", (req, res, next) => {
-    const data = {
-        title: "Single-malt",
-        price: 100,
-        imageFile: "single-malt.jpg"
-    }
-    res.render("product", data);
+
+    Product.findOne({title: 'Single-malt'})
+        .then((productDetails) => {
+            res.render("product", productDetails);
+        })
+        .catch(error => console.log('error quetting product from DB', error));
 })
 
 app.get("/tequila", (req, res, next) => {
-    const data = {
-        title: "Tequila",
-        price: 40,
-        imageFile: "tequila.jpg"
-    }
-    res.render("product", data);
+
+    Product.findOne({title: 'Tequila'})
+        .then((productDetails) => {
+            res.render("product", productDetails);
+        })
+        .catch(error => console.log('error quetting product from DB', error));
+})
+
+app.get("/lambrusco", (req, res, next) => {
+
+    Product.findOne({title: 'Lambrusco'})
+        .then((productDetails) => {
+            res.render("product", productDetails);
+        })
+        .catch(error => console.log('error quetting product from DB', error));
 })
 
 

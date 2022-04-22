@@ -1,58 +1,30 @@
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IronSpirits</title>
-    <link rel="stylesheet" href="./stylesheets/style.css" />
-  </head>
-  <body>
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="/about">About</a>
-          </li>
-          <li>
-            <a href="/contact">Contact</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+<h1>Product: {{title}}</h1>
 
-    <h1>Product: {{title}}</h1>
+<h2>Price: {{price}}€</h2>
 
-    <h2>Price: {{price}}€</h2>
+{{#if imageFile}}
+  <img class="image" src="/images/{{imageFile}}" alt="{{title}}" />
 
-    {{#if imageFile}}
-      <img class="image" src="/images/{{imageFile}}" alt="{{title}}" />
+{{else}}
+  <img
+    class="image"
+    src="https://via.placeholder.com/600x400"
+    alt="{{title}}"
+  />
+{{/if}}
 
-    {{else}}
-      <img
-        class="image"
-        src="https://via.placeholder.com/600x400"
-        alt="{{title}}"
-      />
-    {{/if}}
+<div>
 
-    <div>
-
-      {{#if stores}}
-        <h3>Stores available:</h3>
-        <ul>
-          {{#each stores}}
-            <li>{{this}} <a href="#"><button>More details</button></a></li>
-          {{else}}
-            <p>No stores yet!</p>
-          {{/each}}
-        </ul>
+  {{#if stores}}
+    <h3>Stores available:</h3>
+    <ul>
+      {{#each stores}}
+        <li>{{this}} <a href="#"><button>More details</button></a></li>
       {{else}}
-        <h3>Product still not available</h3>
-      {{/if}}
-    </div>
-
-  </body>
-</html>
+        <p>No stores yet!</p>
+      {{/each}}
+    </ul>
+  {{else}}
+    <h3>Product still not available</h3>
+  {{/if}}
+</div>
