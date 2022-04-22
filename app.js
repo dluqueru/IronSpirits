@@ -34,40 +34,50 @@ app.get("/contact", (req, res, next) => {
     res.render('contact');
 });
 
-app.get("/limoncello", (req, res, next) => {
+// app.get("/limoncello", (req, res, next) => {
 
-    Product.findOne({title: 'Limoncello'})
+//     Product.findOne({title: 'Limoncello'})
+//         .then((productDetails) => {
+//             res.render("product", productDetails);
+//         })
+//         .catch(error => console.log('error quetting product from DB', error));
+// })
+
+// app.get("/single-malt", (req, res, next) => {
+
+//     Product.findOne({title: 'Single-malt'})
+//         .then((productDetails) => {
+//             res.render("product", productDetails);
+//         })
+//         .catch(error => console.log('error quetting product from DB', error));
+// })
+
+// app.get("/tequila", (req, res, next) => {
+
+//     Product.findOne({title: 'Tequila'})
+//         .then((productDetails) => {
+//             res.render("product", productDetails);
+//         })
+//         .catch(error => console.log('error quetting product from DB', error));
+// })
+
+// app.get("/lambrusco", (req, res, next) => {
+
+//     Product.findOne({title: 'Lambrusco'})
+//         .then((productDetails) => {
+//             res.render("product", productDetails);
+//         })
+//         .catch(error => console.log('error quetting product from DB', error));
+// })
+
+app.get("/products/:productId", (req, res, next) => {
+
+    Product.findById(req.params.productId)
         .then((productDetails) => {
-            res.render("product", productDetails);
+        res.render("product", productDetails);
         })
         .catch(error => console.log('error quetting product from DB', error));
-})
-
-app.get("/single-malt", (req, res, next) => {
-
-    Product.findOne({title: 'Single-malt'})
-        .then((productDetails) => {
-            res.render("product", productDetails);
-        })
-        .catch(error => console.log('error quetting product from DB', error));
-})
-
-app.get("/tequila", (req, res, next) => {
-
-    Product.findOne({title: 'Tequila'})
-        .then((productDetails) => {
-            res.render("product", productDetails);
-        })
-        .catch(error => console.log('error quetting product from DB', error));
-})
-
-app.get("/lambrusco", (req, res, next) => {
-
-    Product.findOne({title: 'Lambrusco'})
-        .then((productDetails) => {
-            res.render("product", productDetails);
-        })
-        .catch(error => console.log('error quetting product from DB', error));
+    
 })
 
 

@@ -21,13 +21,15 @@ const productSchema = new Schema({
       },
     imageFile: {
         type: String,
-        default: "../images/default.jpg"
+        default: "/default.jpg"
     },
     store: {
         type: String,
         enum: ["online", "germany", "colombia"]
     }
 });
+
+
 
 
 const Product = mongoose.model('Product', productSchema);

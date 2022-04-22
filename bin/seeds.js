@@ -23,7 +23,8 @@ const products = [
     },
     {
         title: "Lambrusco",
-        price: 18
+        price: 18,
+        imageFile:
     }
 ]
 
