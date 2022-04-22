@@ -34,6 +34,15 @@ app.get("/contact", (req, res, next) => {
     res.render('contact');
 });
 
+app.get("/products", (req, res, next) => {
+
+    Product.find()
+        .then((productsArr) => {
+            res.render('productList', {products: productsArr});
+        })
+        .catch(error => console.error('error getting products from DB', error));
+});
+
 // app.get("/limoncello", (req, res, next) => {
 
 //     Product.findOne({title: 'Limoncello'})
